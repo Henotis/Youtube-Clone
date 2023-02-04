@@ -1,14 +1,16 @@
-import { Box, CardContent, CardMedia, Typography } from "@mui/material";
+import { Box, CardContent, CardMedia, Typography, Stack } from "@mui/material";
 import React, { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import FetchFromAPI from "../utils/FetchFromAPI";
 import Videos from "./Videos";
+import { Link, Outlet } from "react-router-dom";
 
 const ChannelDetails = () => {
   const { id } = useParams();
   const [channelDetail, setChannelDetail] = useState([]);
   const [videos, setVideos] = useState([]);
   const [channelUrl, setChannelUrl] = useState("");
+  const [visible, setVisible] = useState(true);
 
   useEffect(() => {
     const fetchDetails = async () => {
@@ -25,19 +27,15 @@ const ChannelDetails = () => {
   }, [id]);
 
   return (
-    <Box height="100%" sx={{ pl: 2 }}>
-      <Box
-        width="110%"
-        height="250px"
-        backgroundColor="#009e7c"
-        sx={{ ml: -2 }}
-      />
+    <Box height="100%">
+      <Box width="100%" height="250px" backgroundColor="#009e7c" />
       <CardContent
         sx={{
           width: "100%",
           display: "flex",
           color: "#fff",
           height: "200px",
+          pl: 5,
         }}
       >
         <CardMedia
@@ -64,13 +62,21 @@ const ChannelDetails = () => {
           </Typography>
         </CardContent>
       </CardContent>
-      <Box
-        width="110%"
-        height="2px"
-        backgroundColor="gray"
-        sx={{ ml: -2, mb: 5 }}
-      />
-      <Videos videos={videos} />
+
+      <Stack direction="row" sx={{ justifyContent: "center" }}>
+        <Link to="videos" style={{ textDecoration: "none" }}>
+          <button className="category-btn">videos</button>
+        </Link>
+        <Link to="about" style={{ textDecoration: "none" }}>
+          <button onClick={() => setVisible(false)} className="category-btn">
+            About
+          </button>
+        </Link>
+      </Stack>
+
+      <Box width="110%" height="2px" backgroundColor="gray" sx={{ mb: 5 }} />
+      {visible && <Videos videos={videos} />}
+      {!visible && <Outlet context={[videos, channelDetail]} />}
     </Box>
   );
 };

@@ -8,6 +8,9 @@ import { BrowserRouter, Routes, Route } from "react-router-dom";
 import { useState } from "react";
 import ChannelDetails from "./components/ChannelDetails";
 import VideoDetails from "./components/VideoDetails";
+import ChannelVideos from "./components/ChannelVideos";
+import ChannelAbout from "./components/ChannelAbout";
+import SearchFeed from "./components/SearchFeed";
 
 const navTheme = createTheme({
   palette: {
@@ -24,7 +27,13 @@ const App = () => {
   return (
     <BrowserRouter>
       <ThemeProvider theme={navTheme}>
-        <Box sx={{ backgroundColor: "#1a1a1a" }}>
+        <Box
+          sx={{
+            backgroundColor: "#1a1a1a",
+            width: "100%",
+            overflowX: "hidden",
+          }}
+        >
           <Navbar
             isDrawerOpen={isDrawerOpen}
             setIsDrawerOpen={setIsDrawerOpen}
@@ -33,8 +42,12 @@ const App = () => {
           />
           <Routes>
             <Route path="/" exact element={<Feed videos={videos} />} />
-            <Route path="/channel/:id" exact element={<ChannelDetails />} />
+            <Route path="channel/:id/" exact element={<ChannelDetails />}>
+              <Route path="videos" exact element={<ChannelVideos />} />
+              <Route path="about" exact element={<ChannelAbout />} />
+            </Route>
             <Route path="/video/:id" exact element={<VideoDetails />} />
+            <Route path="/search/:id" exact element={<SearchFeed />} />
           </Routes>
         </Box>
       </ThemeProvider>

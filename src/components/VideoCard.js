@@ -20,7 +20,7 @@ import {
 import { width } from "@mui/system";
 
 const card = {
-  width: { xs: "100%", sm: "358px", md: "320px" },
+  width: { xs: "325px", sm: "358px", md: "358px" },
   boxShadow: "none",
   borderRadius: "11px",
   backgroundColor: "#1a1a1a",
@@ -34,17 +34,11 @@ const card = {
 };
 
 const cardMedia = {
-  width: { xs: "100%", sm: "358px" },
-  height: 180,
-  borderRadius: "10px",
+  width: { xs: "325px", sm: "358px" },
+  height: 190,
 };
 
-const VideoCard = ({
-  video: {
-    id: { videoId },
-    snippet,
-  },
-}) => {
+const VideoCard = ({ video }) => {
   // if the route is at /channel, the link to go to channel is disabled
   const location = useLocation();
   const [channelDisabler, setChannelDisabler] = useState(true);
@@ -60,34 +54,40 @@ const VideoCard = ({
     disableChannel();
   }, [location.pathname]);
 
+  // I would try to add a view counter to each and every card but that would require me to make 50 API calls
   return (
     <div className="dropdown">
       <Card card="true" sx={card}>
-        <CardMedia
-          image={snippet?.thumbnails?.high?.url}
-          alt={snippet?.title}
-          sx={cardMedia}
-        />
-        <CardContent sx={{ height: "106px" }}>
-          <Typography sx={{ color: "white", height: "50px" }}>
-            {snippet.title.slice(0, 55) || demoVideoTitle.slice(0, 55)}
-            {snippet.title.length > 60 ? "..." : ""}
-          </Typography>
-          <Link
-            to={
-              snippet?.channelId
-                ? `/channel/${snippet.channelId}`
-                : demoChannelUrl
-            }
-            style={{ textDecoration: "none" }}
-          >
-            <Typography
-              sx={{ color: "#b5b5b5", "&:hover": { color: "white" } }}
-            >
-              {channelDisabler ? snippet.channelTitle : ""}
+        <Link
+          to={`/video/${video.id.videoId}`}
+          style={{ textDecoration: "none" }}
+        >
+          <CardMedia
+            image={video?.snippet?.thumbnails?.high?.url}
+            alt={video?.snippet?.title}
+            sx={cardMedia}
+          />
+          <CardContent sx={{ height: "75px" }}>
+            <Typography sx={{ color: "white" }}>
+              {video?.snippet.title.slice(0, 55) || demoVideoTitle.slice(0, 55)}
+              {video?.snippet.title.length > 60 ? "..." : ""}
             </Typography>
-          </Link>
-        </CardContent>
+          </CardContent>
+        </Link>
+        <Link
+          to={
+            video?.snippet?.channelId
+              ? `/channel/${video?.snippet.channelId}`
+              : demoChannelUrl
+          }
+          style={{ textDecoration: "none" }}
+        >
+          <Typography
+            sx={{ pl: 2, color: "#b5b5b5", "&:hover": { color: "white" } }}
+          >
+            {channelDisabler ? video?.snippet.channelTitle : ""}
+          </Typography>
+        </Link>
 
         <div className="dropdown-content">
           <button className="video-button"> Watch Later </button>

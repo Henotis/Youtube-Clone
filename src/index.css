@@ -4,6 +4,10 @@
   box-sizing: border-box;
 }
 
+body {
+  height: 100%;
+}
+
 
 ::-webkit-scrollbar {
   width: 0px;
@@ -42,6 +46,9 @@
   border: none;
   outline: none;
   width: 350px;
+  height: 35px;
+  background-color: #4f4f4f;
+  color: white;
 }
 
 .category-btn {
