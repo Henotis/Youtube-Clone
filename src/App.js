@@ -23,6 +23,7 @@ const navTheme = createTheme({
 const App = () => {
   const [isDrawerOpen, setIsDrawerOpen] = useState(false);
   const [videos, setVideos] = useState([]);
+  const [selectedCategory, setSelectedCategory] = useState("New");
 
   return (
     <BrowserRouter>
@@ -39,9 +40,17 @@ const App = () => {
             setIsDrawerOpen={setIsDrawerOpen}
             videos={videos}
             setVideos={setVideos}
+            selectedCategory={selectedCategory}
+            setSelectedCategory={setSelectedCategory}
           />
           <Routes>
-            <Route path="/" exact element={<Feed videos={videos} />} />
+            <Route
+              path="/"
+              exact
+              element={
+                <Feed videos={videos} selectedCategory={selectedCategory} />
+              }
+            />
             <Route path="channel/:id/" exact element={<ChannelDetails />}>
               <Route path="videos" exact element={<ChannelVideos />} />
               <Route path="about" exact element={<ChannelAbout />} />

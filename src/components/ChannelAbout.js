@@ -3,7 +3,7 @@ import React from "react";
 import { useOutletContext } from "react-router-dom";
 
 const ChannelAbout = () => {
-  const [videos, channelDetail] = useOutletContext();
+  const [channelDetail] = useOutletContext();
   const toInt = parseInt(channelDetail?.statistics?.viewCount);
   const formattedNumber = toInt.toLocaleString("en-US");
   return (

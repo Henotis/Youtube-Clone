@@ -21,11 +21,11 @@ const SearchBar = () => {
       onSubmit={onHandleSubmit}
       sx={{
         borderRadius: 20,
-        border: "1px solid #e3e3e3",
-        backgroundColor: "#4f4f4f",
-        pl: 2,
+        border: "1px solid #3d3d3d",
+        backgroundColor: "#1a1a1a",
+        pl: { xs: 0, sm: 0, md: 2 },
         boxShadow: "none",
-        mr: { sm: 5 },
+        overflow: "hidden",
       }}
     >
       <input
@@ -36,7 +36,13 @@ const SearchBar = () => {
       />
       <IconButton
         type="submit"
-        sx={{ p: "10px", color: "white" }}
+        sx={{
+          p: "10px",
+          color: "white",
+          backgroundColor: "#303030",
+          borderRadius: "0px",
+          width: { xs: "30px", sm: "70px", md: "70px" },
+        }}
         aria-label="search"
         border="none"
       >
