@@ -4,7 +4,6 @@ import { Link } from "react-router-dom";
 import { demoProfilePicture } from "../utils/constants";
 
 const ChannelCard = ({ channel }) => {
-  console.log(channel);
   return (
     <Box
       sx={{
@@ -24,7 +23,10 @@ const ChannelCard = ({ channel }) => {
       >
         <CardContent>
           <CardMedia
-            image={channel?.snippet?.thumbnails?.high.url || demoProfilePicture}
+            component="img"
+            image={
+              channel?.snippet?.thumbnails?.default?.url || demoProfilePicture
+            }
             alt={channel?.snippet?.title}
             sx={{
               borderRadius: "50%",

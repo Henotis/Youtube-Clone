@@ -9,14 +9,12 @@ const ChannelDetails = () => {
   const { id } = useParams();
   const [channelDetail, setChannelDetail] = useState([]);
   const [videos, setVideos] = useState([]);
-  const [channelUrl, setChannelUrl] = useState("");
   const [visible, setVisible] = useState(true);
 
   useEffect(() => {
     const fetchDetails = async () => {
       const data = await FetchFromAPI(`channels?part=snippet&id=${id}`);
       setChannelDetail(data?.items[0]);
-      setChannelUrl(channelDetail?.snippet?.thumbnails?.high?.url);
 
       const videosData = await FetchFromAPI(
         `search?channelId=${id}&part=snippet&order=date&maxResults=50`
@@ -40,7 +38,7 @@ const ChannelDetails = () => {
       >
         <CardMedia
           component="img"
-          image={channelUrl}
+          image={channelDetail?.snippet?.thumbnails?.default?.url}
           alt={channelDetail?.snippet?.title}
           sx={{
             borderRadius: "50%",

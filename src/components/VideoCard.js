@@ -6,10 +6,7 @@ import {
   Card,
   CardContent,
   CardMedia,
-  Box,
-  Stack,
 } from "@mui/material";
-import { CheckCircle } from "@mui/icons-material";
 import {
   demoThumbnailUrl,
   demoVideoUrl,
@@ -17,7 +14,6 @@ import {
   demoChannelUrl,
   demoChannelTitle,
 } from "../utils/constants";
-import { width } from "@mui/system";
 
 const card = {
   width: { xs: "325px", sm: "358px", md: "358px" },
@@ -63,12 +59,12 @@ const VideoCard = ({ video }) => {
           style={{ textDecoration: "none" }}
         >
           <CardMedia
-            image={video?.snippet?.thumbnails?.high?.url}
+            image={video?.snippet?.thumbnails?.medium?.url}
             alt={video?.snippet?.title}
             sx={cardMedia}
           />
           <CardContent sx={{ height: "75px" }}>
-            <Typography sx={{ color: "white" }}>
+            <Typography sx={{ color: "white", fontWeight: "bold" }}>
               {video?.snippet.title.slice(0, 55) || demoVideoTitle.slice(0, 55)}
               {video?.snippet.title.length > 60 ? "..." : ""}
             </Typography>

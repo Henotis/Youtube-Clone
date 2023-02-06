@@ -1,26 +1,23 @@
 import React from "react";
-import {
-  AppBar,
-  Box,
-  IconButton,
-  TextField,
-  Toolbar,
-  Typography,
-} from "@mui/material";
+import { AppBar, Box, IconButton, Toolbar, Typography } from "@mui/material";
 import MenuIcon from "@mui/icons-material/Menu";
 import AccountCircleIcon from "@mui/icons-material/AccountCircle";
+import AirplayIcon from "@mui/icons-material/Airplay";
 import SearchBar from "./SearchBar";
 import { useState } from "react";
 import { Drawer } from "@mui/material";
 import Sidebar from "./Sidebar";
 import { useEffect } from "react";
 import FetchFromAPI from "../utils/FetchFromAPI";
-import Feed from "./Feed";
 import { Link } from "react-router-dom";
 
-const Navbar = ({ isDrawerOpen, setIsDrawerOpen, setVideos }) => {
-  const [selectedCategory, setSelectedCategory] = useState("New");
-
+const Navbar = ({
+  isDrawerOpen,
+  setIsDrawerOpen,
+  setVideos,
+  selectedCategory,
+  setSelectedCategory,
+}) => {
   useEffect(() => {
     FetchFromAPI(`search?q=${selectedCategory}&part=snippet`).then((data) =>
       setVideos(data.items)
@@ -46,35 +43,46 @@ const Navbar = ({ isDrawerOpen, setIsDrawerOpen, setVideos }) => {
             variant="h6"
             noWrap
             component="div"
-            sx={{ flexGrow: 0.1, display: { xs: "none", sm: "block" } }}
+            sx={{
+              flexGrow: { xs: 0, sm: 0.1 },
+              display: { xs: "none", sm: "block", md: "block" },
+            }}
           >
             <Link to="/" style={{ textDecoration: "none", color: "white" }}>
-              <span>Gluetube</span>
+              <Box>
+                <AirplayIcon sx={{ width: "20px", height: "18px" }} /> Gluetube
+              </Box>
             </Link>
           </Typography>
 
           <SearchBar />
           <Typography sx={{ flexGrow: 1 }}></Typography>
-          <IconButton size="large" color="inherit">
+          <IconButton
+            sx={{ size: { xs: "small", sm: "large" } }}
+            color="inherit"
+          >
             <AccountCircleIcon />
           </IconButton>
         </Toolbar>
       </AppBar>
+
       <Drawer
         anchor="left"
         open={isDrawerOpen}
         onClose={() => setIsDrawerOpen(false)}
       >
         <Box width="250px" height="100%" sx={{ backgroundColor: "#1a1a1a" }}>
-          <Typography
-            variant="h6"
-            noWrap
-            component="div"
-            align="center"
-            sx={{ color: "white", paddingTop: "16px" }}
-          >
-            Gluetube
-          </Typography>
+          <Link to="/" style={{ textDecoration: "none", color: "white" }}>
+            <Typography
+              variant="h6"
+              noWrap
+              component="div"
+              align="center"
+              sx={{ color: "white", paddingTop: "16px" }}
+            >
+              <AirplayIcon sx={{ width: "20px", height: "18px" }} /> Gluetube
+            </Typography>
+          </Link>
           <Sidebar
             isDrawerOpen={isDrawerOpen}
             setIsDrawerOpen={setIsDrawerOpen}
