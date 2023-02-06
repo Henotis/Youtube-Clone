@@ -1,6 +1,5 @@
 import { categories } from "../utils/constants";
 import { Stack } from "@mui/material";
-import { useEffect } from "react";
 import { Link } from "react-router-dom";
 
 const Sidebar = ({
