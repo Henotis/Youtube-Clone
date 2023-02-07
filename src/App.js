@@ -11,6 +11,7 @@ import VideoDetails from "./components/VideoDetails";
 import ChannelVideos from "./components/ChannelVideos";
 import ChannelAbout from "./components/ChannelAbout";
 import SearchFeed from "./components/SearchFeed";
+import Error from "./components/Error";
 
 const navTheme = createTheme({
   palette: {
@@ -44,19 +45,20 @@ const App = () => {
             setSelectedCategory={setSelectedCategory}
           />
           <Routes>
-            <Route
-              path="/"
-              exact
-              element={
-                <Feed videos={videos} selectedCategory={selectedCategory} />
-              }
-            />
-            <Route path="channel/:id/" exact element={<ChannelDetails />}>
-              <Route path="videos" exact element={<ChannelVideos />} />
-              <Route path="about" exact element={<ChannelAbout />} />
-            </Route>
-            <Route path="/video/:id" exact element={<VideoDetails />} />
-            <Route path="/search/:id" exact element={<SearchFeed />} />
+              <Route
+                path="/"
+                exact
+                element={
+                  <Feed videos={videos} selectedCategory={selectedCategory} />
+                }
+              />
+              <Route path="channel/:id/" exact element={<ChannelDetails />}>
+                <Route path="videos" exact element={<ChannelVideos />} />
+                <Route path="about" exact element={<ChannelAbout />} />
+              </Route>
+              <Route path="/video/:id" exact element={<VideoDetails />} />
+              <Route path="/search/:id" exact element={<SearchFeed />} />
+              <Route path="*" element={<Error />}></Route>
           </Routes>
         </Box>
       </ThemeProvider>
