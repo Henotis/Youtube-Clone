@@ -24,7 +24,7 @@ const SearchFeed = () => {
       gap={2}
       sx={{ pt: 10 }}
     >
-      {videos.map((item, index) => {
+      {videos?.map((item, index) => {
         return (
           <Box key={index}>
             {item.id.videoId && <VideoCard video={item} />}
